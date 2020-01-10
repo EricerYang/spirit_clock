@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:spirit_clock/clock_page.dart';
 
 class SpiritClock extends StatefulWidget {
-
   const SpiritClock(this.model);
   final ClockModel model;
 
@@ -14,32 +13,31 @@ class SpiritClock extends StatefulWidget {
   _SpiritClockState createState() => _SpiritClockState();
 }
 
-class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin {
-
-  DateTime _dateTime = DateTime.now();
+class _SpiritClockState extends State<SpiritClock>
+    with TickerProviderStateMixin {
   Timer _earthTimer;
   Timer _meteorTimer;
   Timer _starOneTimer;
   Timer _starTwoTimer;
   Timer _starThreeTimer;
-  AnimationController _earthController;
-  AnimationController _meteorController;
-  Animation _meteorMovement;
-  double opacityOneLevel = 0.0;
-  double opacityTwoLevel = 0.0;
-  double opacityThreeLevel = 0.0;
   int bOneTime = 1000;
   int bTwoTime = 1000;
   int bThreeTime = 1000;
+  double opacityOneLevel = 0.0;
+  double opacityTwoLevel = 0.0;
+  double opacityThreeLevel = 0.0;
+  Animation _meteorMovement;
+  DateTime _dateTime = DateTime.now();
+  AnimationController _earthController;
+  AnimationController _meteorController;
 
-  _changeOneOpacity() {
-    if(opacityOneLevel == 0) {
+  void _changeOneOpacity() {
+    if (opacityOneLevel == 0) {
       setState(() {
         opacityOneLevel = 1.0;
         bOneTime = 100;
       });
-    }
-    else {
+    } else {
       setState(() {
         opacityOneLevel = 0.0;
         bOneTime = 1000;
@@ -47,14 +45,13 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
     }
   }
 
-  _changeTwoOpacity() {
-    if(opacityTwoLevel == 0) {
+  void _changeTwoOpacity() {
+    if (opacityTwoLevel == 0) {
       setState(() {
         opacityTwoLevel = 1.0;
         bTwoTime = 100;
       });
-    }
-    else {
+    } else {
       setState(() {
         opacityTwoLevel = 0.0;
         bTwoTime = 1000;
@@ -62,14 +59,13 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
     }
   }
 
-  _changeThreeOpacity() {
-    if(opacityThreeLevel == 0) {
+  void _changeThreeOpacity() {
+    if (opacityThreeLevel == 0) {
       setState(() {
         opacityThreeLevel = 1.0;
         bThreeTime = 100;
       });
-    }
-    else {
+    } else {
       setState(() {
         opacityThreeLevel = 0.0;
         bThreeTime = 1000;
@@ -80,7 +76,10 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   void _updateTime() {
     setState(() {
       _dateTime = DateTime.now();
-      _earthTimer = Timer(Duration(seconds: 1), _updateTime,);
+      _earthTimer = Timer(
+        Duration(seconds: 1),
+        _updateTime,
+      );
     });
   }
 
@@ -114,7 +113,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   /// 0xff2196f3 - light
   Widget themeIcon(BuildContext context) {
     // light
-    if(Theme.of(context).accentColor == Color(0xff2196f3)) {
+    if (Theme.of(context).accentColor == Color(0xff2196f3)) {
       return Container(
         padding: EdgeInsets.fromLTRB(30.0, 0.0, 0.0, 10.0),
         child: Image.asset(
@@ -138,49 +137,43 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   }
 
   Widget weatherIcon(String weatherString) {
-    if(weatherString == "cloudy") {
+    if (weatherString == "cloudy") {
       return Image.asset(
         "assets/cloudy-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else if(weatherString == "foggy") {
+    } else if (weatherString == "foggy") {
       return Image.asset(
         "assets/foggy-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else if(weatherString == "rainy") {
+    } else if (weatherString == "rainy") {
       return Image.asset(
         "assets/rainy-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else if(weatherString == "snowy") {
+    } else if (weatherString == "snowy") {
       return Image.asset(
         "assets/snowy-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else if(weatherString == "sunny") {
+    } else if (weatherString == "sunny") {
       return Image.asset(
         "assets/sunny-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else if(weatherString == "thunderstorm") {
+    } else if (weatherString == "thunderstorm") {
       return Image.asset(
         "assets/thunderstorm-fill.png",
         width: 22.0,
         height: 22.0,
       );
-    }
-    else {
+    } else {
       return Image.asset(
         "assets/windy-fill.png",
         width: 22.0,
@@ -199,10 +192,9 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
         height: 4.0,
       ),
       onEnd: () {
-        if(opacityOneLevel == 1.0) {
+        if (opacityOneLevel == 1.0) {
           _changeOneOpacity();
-        }
-        else {
+        } else {
           _loopOneStarAnimation();
         }
       },
@@ -219,10 +211,9 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
         height: 4.0,
       ),
       onEnd: () {
-        if(opacityTwoLevel == 1.0) {
+        if (opacityTwoLevel == 1.0) {
           _changeTwoOpacity();
-        }
-        else {
+        } else {
           _loopTwoStarAnimation();
         }
       },
@@ -239,10 +230,9 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
         height: 4.0,
       ),
       onEnd: () {
-        if(opacityThreeLevel == 1.0) {
+        if (opacityThreeLevel == 1.0) {
           _changeThreeOpacity();
-        }
-        else {
+        } else {
           _loopThreeStarAnimation();
         }
       },
@@ -250,7 +240,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   }
 
   Widget _timeUnit() {
-    if(int.parse(DateFormat('HH').format(_dateTime)) > 12) {
+    if (int.parse(DateFormat('HH').format(_dateTime)) > 12) {
       return Container(
         child: Text(
           'P M',
@@ -263,8 +253,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
           ),
         ),
       );
-    }
-    else {
+    } else {
       return Container(
         child: Text(
           'A M',
@@ -283,8 +272,12 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   @override
   void initState() {
     super.initState();
-    _earthController = AnimationController(duration: const Duration(milliseconds: 500000), vsync: this);
-    _meteorController = AnimationController(duration: Duration(milliseconds: 5000), vsync: this,);
+    _earthController = AnimationController(
+        duration: const Duration(milliseconds: 500000), vsync: this);
+    _meteorController = AnimationController(
+      duration: Duration(milliseconds: 5000),
+      vsync: this,
+    );
     widget.model.addListener(_updateModel);
     _updateTime();
     _updateModel();
@@ -294,12 +287,8 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
         _earthController.reset();
         _earthController.forward();
       } else if (status == AnimationStatus.dismissed) {
-        //动画从 controller.reverse() 反向执行 结束时会回调此方法
       } else if (status == AnimationStatus.forward) {
-        //执行 controller.forward() 会回调此状态
-      } else if (status == AnimationStatus.reverse) {
-        //执行 controller.reverse() 会回调此状态
-      }
+      } else if (status == AnimationStatus.reverse) {}
     });
     _initMeteorAnimation();
     _loopOneStarAnimation();
@@ -312,46 +301,62 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
     _meteorController.forward();
   }
 
-  _initMeteorAnimation(){
+  void _initMeteorAnimation() {
     _meteorMovement = Tween(
-        begin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0,),
-        end: EdgeInsets.only(left: 1000.0, top: 530.0,)
-    ).animate(
-        _meteorController
-    )..addListener((){
-      setState(() {
-
+        begin: EdgeInsets.only(
+          left: 0.0,
+          top: 0.0,
+          right: 0.0,
+          bottom: 0.0,
+        ),
+        end: EdgeInsets.only(
+          left: 1000.0,
+          top: 530.0,
+        )).animate(_meteorController)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((listener) {
+        if (listener == AnimationStatus.completed) {
+          _loopMeteorAnimation();
+        }
       });
-    })
-    ..addStatusListener((listener) {
-      if(listener == AnimationStatus.completed) {
-        _loopMeteorAnimation();
-      }
-    });
     _meteorForward();
   }
 
   void _loopMeteorAnimation() {
     setState(() {
-      _meteorTimer = Timer(Duration(seconds: 25), _meteorForward, );
+      _meteorTimer = Timer(
+        Duration(seconds: 25),
+        _meteorForward,
+      );
     });
   }
 
   void _loopOneStarAnimation() {
     setState(() {
-      _starOneTimer = Timer(Duration(seconds: 7), _changeOneOpacity, );
+      _starOneTimer = Timer(
+        Duration(seconds: 7),
+        _changeOneOpacity,
+      );
     });
   }
 
   void _loopTwoStarAnimation() {
     setState(() {
-      _starTwoTimer = Timer(Duration(seconds: 9), _changeTwoOpacity, );
+      _starTwoTimer = Timer(
+        Duration(seconds: 9),
+        _changeTwoOpacity,
+      );
     });
   }
 
   void _loopThreeStarAnimation() {
     setState(() {
-      _starThreeTimer = Timer(Duration(seconds: 11), _changeThreeOpacity, );
+      _starThreeTimer = Timer(
+        Duration(seconds: 11),
+        _changeThreeOpacity,
+      );
     });
   }
 
@@ -364,45 +369,32 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     String month = DateFormat('MM').format(_dateTime);
-    if(month == "01") {
+    if (month == "01") {
       month = "Jan";
-    }
-    else if(month == "02") {
+    } else if (month == "02") {
       month = "Feb";
-    }
-    else if(month == "03") {
+    } else if (month == "03") {
       month = "Mar";
-    }
-    else if(month == "04") {
+    } else if (month == "04") {
       month = "Apr";
-    }
-    else if(month == "05") {
+    } else if (month == "05") {
       month = "May";
-    }
-    else if(month == "06") {
+    } else if (month == "06") {
       month = "Jun";
-    }
-    else if(month == "07") {
+    } else if (month == "07") {
       month = "Jul";
-    }
-    else if(month == "08") {
+    } else if (month == "08") {
       month = "Aug";
-    }
-    else if(month == "09") {
+    } else if (month == "09") {
       month = "Sep";
-    }
-    else if(month == "10") {
+    } else if (month == "10") {
       month = "Oct";
-    }
-    else if(month == "11") {
+    } else if (month == "11") {
       month = "Nov";
-    }
-    else {
+    } else {
       month = "Dec";
     }
     final day = DateFormat('dd').format(_dateTime);
@@ -412,8 +404,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
       color: Colors.black87,
       child: Stack(
         children: <Widget>[
-
-          // 星星图片 背景部分
+          /// Background part star picture
           Container(
             color: Colors.black,
             child: ConstrainedBox(
@@ -425,7 +416,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
             ),
           ),
 
-          // 流星动画效果
+          /// Meteor animation effect
           Container(
             padding: _meteorMovement.value,
             child: Image.asset(
@@ -435,58 +426,63 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
             ),
           ),
 
-          // 星星1号
+          /// star 1 group
           Container(
-            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 5, MediaQuery.of(context).size.width / 10, 0.0, 0.0),
+            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 5,
+                MediaQuery.of(context).size.width / 10, 0.0, 0.0),
             child: starOneBreathe(bOneTime),
           ),
 
-          // 星星2号
+          /// star 2 group
           Container(
-            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 15, MediaQuery.of(context).size.height / 2, 0.0, 0.0),
+            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 15,
+                MediaQuery.of(context).size.height / 2, 0.0, 0.0),
             child: starTwoBreathe(bTwoTime),
           ),
 
-          // 星星3号
+          /// star 3 group
           Container(
-            margin: EdgeInsets.fromLTRB(0.0, 0.0, MediaQuery.of(context).size.width / 10, MediaQuery.of(context).size.height / 3),
+            margin: EdgeInsets.fromLTRB(
+                0.0,
+                0.0,
+                MediaQuery.of(context).size.width / 10,
+                MediaQuery.of(context).size.height / 3),
             child: Align(
               alignment: Alignment.bottomRight,
               child: starOneBreathe(bOneTime),
             ),
           ),
 
-          // 星星4号
+          /// star 4 group
           Container(
-            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 5, 0.0, 0.0, MediaQuery.of(context).size.height / 10),
+            margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width / 5,
+                0.0, 0.0, MediaQuery.of(context).size.height / 10),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: starThreeBreathe(bThreeTime),
             ),
           ),
 
-          // 地球背景部分
+          /// Background part earth picture
           buildEarthRotationTransition(),
 
-          // 黑色蒙版
+          /// Mask
           Container(
             color: Colors.black26,
           ),
 
-          // 内容部分
+          /// Content part
           Container(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-
-                // 上部分
+                /// Upper
                 Container(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-
-                      // 日期
+                      /// Date
                       Container(
                         padding: EdgeInsets.fromLTRB(40.0, 25.0, 0.0, 0.0),
                         child: Align(
@@ -501,42 +497,45 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
                         ),
                       ),
 
-                      // 时间
+                      /// Time
                       Container(
                         margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                         padding: EdgeInsets.fromLTRB(0.0, 15.0, 53.0, 0.0),
                         child: Align(
                           alignment: Alignment.bottomRight,
-                          child: widget.model.is24HourFormat ? Clock24Page(fontSize, true) : Clock12Page(fontSize, false),
+                          child: widget.model.is24HourFormat
+                              ? Clock24Page(fontSize, true)
+                              : Clock12Page(fontSize, false),
                         ),
                       ),
 
+                      /// Time format
                       Container(
                         padding: EdgeInsets.fromLTRB(0.0, 0.0, 58.0, 0.0),
                         child: FractionallySizedBox(
                           widthFactor: 1,
-                          child: widget.model.is24HourFormat ? SizedBox.shrink() : _timeUnit(),
+                          child: widget.model.is24HourFormat
+                              ? SizedBox.shrink()
+                              : _timeUnit(),
                         ),
                       ),
-
                     ],
                   ),
                 ),
 
-                // 下部分
+                /// Lower
                 Container(
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-
-                      // 左边
+                      /// Theme icon
                       themeIcon(context),
 
-                      // 天气
+                      /// Weather
                       Container(
                         padding: EdgeInsets.fromLTRB(0.0, 0.0, 40.0, 15.0),
-                        child:  Column(
+                        child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
@@ -547,9 +546,12 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: <Widget>[
+                                    /// Weather icon
                                     Container(
-                                      margin: EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
-                                      child: weatherIcon(widget.model.weatherString),
+                                      margin: EdgeInsets.fromLTRB(
+                                          0.0, 0.0, 8.0, 0.0),
+                                      child: weatherIcon(
+                                          widget.model.weatherString),
                                     ),
                                     Container(
                                       child: Text(
@@ -579,15 +581,12 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
-
         ],
       ),
     );
@@ -596,6 +595,7 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
   @override
   void dispose() {
     _meteorController?.dispose();
+    _earthController?.dispose();
     _starThreeTimer?.cancel();
     _starTwoTimer?.cancel();
     _starOneTimer?.cancel();
@@ -605,5 +605,4 @@ class _SpiritClockState extends State<SpiritClock> with TickerProviderStateMixin
     widget.model.dispose();
     super.dispose();
   }
-
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spirit_clock/flip_pannel.dart';
 
+/// 24-format
 class Clock24Page extends StatelessWidget {
   Clock24Page(this.fontSize, this.format);
   final fontSize;
@@ -22,6 +23,7 @@ class Clock24Page extends StatelessWidget {
   }
 }
 
+/// 12-format
 class Clock12Page extends StatelessWidget {
   Clock12Page(this.fontSize, this.format);
   final fontSize;

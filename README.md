@@ -1,7 +1,7 @@
 # Spirit Clock
 
 
-🏆**This work is made to participate in the [Flutter Clock](https://flutter.dev/clock) challenge.**🏆
+**This work is made to participate in the [Flutter Clock](https://flutter.dev/clock) challenge.**
 
 
 Use flutter to create a beautiful dial interface for Lenovo smart clock.

@@ -10,4 +10,6 @@ See a [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
 
 This is my works.
 
-<img src='img/spirit_clock.gif' width='350'>
+<div align=center>
+	<img src='img/spirit_clock.gif' width='550'>
+</div>
